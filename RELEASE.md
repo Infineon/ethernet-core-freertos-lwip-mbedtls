@@ -11,6 +11,10 @@ See the [README.md](./README.md) for a complete description of the [Ethernet Cor
 
 ## Changelog
 
+### v2.0.0
+- Supports TLS version 1.3
+- Supports mbed TLS version 3.4.0
+
 ### v1.0.0
 
 - Initial release for Ethernet Core FreeRTOS lwIP mbedtls library
@@ -22,10 +26,8 @@ This version of the library was validated for compatibility with the following s
 
 | Software and tools                                              | Version |
 | :---                                                            | :----:  |
-| ModusToolbox&trade; software environment                        | 3.0     |
-| ModusToolbox&trade; Device Configurator                         | 4.0     |
-| ModusToolbox&trade; CAPSENSE&trade; Configurator / Tuner tools  | 5.0     |
-| Peripheral Driver Library (PDL)                                 | 3.0.0   |
-| GCC Compiler                                                    | 10.3.1  |
+| ModusToolbox&trade; software environment                        | 3.1     |
+| ModusToolbox&trade; Device Configurator                         | 4.10     |
+| GCC Compiler                                                    | 11.3.1  |
 | IAR Compiler                                                    | 9.30    |
 | Arm&reg; Compiler 6                                             | 6.16    |
