@@ -11,6 +11,9 @@ See the [README.md](./README.md) for a complete description of the [Ethernet Cor
 
 ## Changelog
 
+### v2.1.0
+- Supports XMC BSP 2.x version
+
 ### v2.0.0
 - Supports TLS version 1.3
 - Supports mbed TLS version 3.4.0

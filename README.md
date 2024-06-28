@@ -46,42 +46,46 @@ A set of pre-defined configuration files have been bundled with this library for
 You should do the following:
 
 1. Copy *lwipopts.h*, and *mbedtls_user_config.h* files from the *configs* directory to the top-level code example directory in the project.
-   
-2. Configure the `MBEDTLS_USER_CONFIG_FILE` C macro to mbedtls_user_config.h in the Makefile to provide the user configuration to the mbed TLS library. The Makefile entry should look like as follows:
+
+2. Copy the FreeRTOSConfig.h file from the freertos/Source/portable/COMPONENT_$(CORE) folder to your project, where $(CORE) is the target Arm® Cortex®-M CPU core (CM0, CM0P, CM4, CM33, CR4 or CM7)
+
+3. Modify `configUSE_TICKLESS_IDLE` define value to 0 in *FreeRTOSConfig.h* file. On XMC Kits, ethernet phy chip is not capable of waking MCU from deep sleep. Hence FreeRTOS tickless idle feature need to be disabled.
+
+4. Configure the `MBEDTLS_USER_CONFIG_FILE` C macro to mbedtls_user_config.h in the Makefile to provide the user configuration to the mbed TLS library. The Makefile entry should look like as follows:
    
     ```
     DEFINES+=MBEDTLS_USER_CONFIG_FILE='"mbedtls_user_config.h"'
     ```
    
-3. [Ethernet Connection Manager (ECM)](https://github.com/Infineon/ethernet-connection-manager) by default does the pin configuration for ETH1 interface on KIT-XMC72-EVK kit. If user wants to use ETH0 interface on KIT-XMC72-EVK kit or use any other kit, then he needs to provide the pin configuration. To do that user needs to copy *cy_eth_user_config.h* from *ethernet-connection-manager/configs* directory to the root directory of the application and modify it with required pin configurations for the platform/interface to be used.
+5. [Ethernet Connection Manager (ECM)](https://github.com/Infineon/ethernet-connection-manager) by default does the pin configuration for ETH1 interface on KIT-XMC72-EVK kit. If user wants to use ETH0 interface on KIT-XMC72-EVK kit or use any other kit, then he needs to provide the pin configuration. To do that user needs to copy *cy_eth_user_config.h* from *ethernet-connection-manager/configs* directory to the root directory of the application and modify it with required pin configurations for the platform/interface to be used.
    
-4. Add the `CYBSP_ETHERNET_CAPABLE` build configuration to enable the ethernet functionality. The Makefile entry should look like as follows:
+6. Add the `CYBSP_ETHERNET_CAPABLE` build configuration to enable the ethernet functionality. The Makefile entry should look like as follows:
 
     ```
     DEFINES+=CYBSP_ETHERNET_CAPABLE
     ```
 
-5. Add the `CY_RTOS_AWARE` build configuration to inform the HAL that an RTOS environment is being used. The Makefile entry should look like as follows:
+7. Add the `CY_RTOS_AWARE` build configuration to inform the HAL that an RTOS environment is being used. The Makefile entry should look like as follows:
 
     ```
     DEFINES+=CY_RTOS_AWARE
     ```
 
-6. If your application uses automatic private IP addressing (Auto IP), enable `LWIP_AUTOIP` and `LWIP_DHCP_AUTOIP_COOP` in *lwipopts.h* like as follows:
+8. If your application uses automatic private IP addressing (Auto IP), enable `LWIP_AUTOIP` and `LWIP_DHCP_AUTOIP_COOP` in *lwipopts.h* like as follows:
 
     ```
     #define AUTOIP 1
     #define LWIP_DHCP_AUTOIP_COOP 1
     ```
 
-7. Add the following to `COMPONENTS` in the code example project's Makefile: `FREERTOS`, `LWIP`, and `MBEDTLS`.
+9. Add the following to `COMPONENTS` in the code example project's Makefile: `FREERTOS`, `LWIP`, and `MBEDTLS`.
 
     For example:
     
     ```
     COMPONENTS=FREERTOS LWIP MBEDTLS
     ``` 
-8. All the log messages are disabled by default. Do the following to enable log messages:
+10. All the log messages are disabled by default. Do the following to enable log messages:
 
    1. Add the `ENABLE_CONNECTIVITY_MIDDLEWARE_LOGS` macro to the *DEFINES* in the code example's Makefile to enable logs for lwIP network interface integration library. The Makefile entry should look like as follows:
        ```
