@@ -11,6 +11,9 @@ See the [README.md](./README.md) for a complete description of the [Ethernet Cor
 
 ## Changelog
 
+### v2.2.0
+- lwipopts.h updated to use macros generated from device configurator
+
 ### v2.1.0
 - Supports XMC BSP 2.x version
 

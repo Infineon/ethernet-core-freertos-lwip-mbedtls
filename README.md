@@ -71,21 +71,27 @@ You should do the following:
     DEFINES+=CY_RTOS_AWARE
     ```
 
-8. If your application uses automatic private IP addressing (Auto IP), enable `LWIP_AUTOIP` and `LWIP_DHCP_AUTOIP_COOP` in *lwipopts.h* like as follows:
+8. Add the `CY_DISABLE_XMC7000_DATA_CACHE` macro to the DEFINES in the code example's Makefile to disable data cache. The Makefile entry would look like as follows:
+
+    ```
+    DEFINES+=CY_DISABLE_XMC7000_DATA_CACHE
+    ```
+
+9. If your application uses automatic private IP addressing (Auto IP), enable `LWIP_AUTOIP` and `LWIP_DHCP_AUTOIP_COOP` in *lwipopts.h* like as follows:
 
     ```
     #define AUTOIP 1
     #define LWIP_DHCP_AUTOIP_COOP 1
     ```
 
-9. Add the following to `COMPONENTS` in the code example project's Makefile: `FREERTOS`, `LWIP`, and `MBEDTLS`.
+10. Add the following to `COMPONENTS` in the code example project's Makefile: `FREERTOS`, `LWIP`, and `MBEDTLS`.
 
     For example:
     
     ```
     COMPONENTS=FREERTOS LWIP MBEDTLS
     ``` 
-10. All the log messages are disabled by default. Do the following to enable log messages:
+11. All the log messages are disabled by default. Do the following to enable log messages:
 
    1. Add the `ENABLE_CONNECTIVITY_MIDDLEWARE_LOGS` macro to the *DEFINES* in the code example's Makefile to enable logs for lwIP network interface integration library. The Makefile entry should look like as follows:
        ```
@@ -116,4 +122,4 @@ Secure sockets, lwIP, and mbed TLS libraries contain reference and test applicat
 
 - [Ethernet Core FreeRTOS lwIP mbedtls version](./version.xml)
 
-- [ModusToolbox&trade; cloud connectivity code examples](https://github.com/Infineon?q=mtb-example-anycloud%20NOT%20Deprecated)
+- [ModusToolbox&trade; code examples]( https://github.com/Infineon/Code-Examples-for-ModusToolbox-Software )
