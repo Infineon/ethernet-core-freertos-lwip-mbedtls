@@ -7,9 +7,12 @@ See the [README.md](./README.md) for a complete description of the [Ethernet Cor
 ## Known issues
 | Problem | Workaround |
 | ------- | ---------- |
-| IAR 9.30 toolchain throws build errors on Debug mode, if application explicitly includes iar_dlmalloc.h file | Add '--advance-heap' to LDFLAGS in application Makefile. |
+| IAR 9.30 toolchain throws build errors on Debug mode, if application explicitly includes iar_dlmalloc.h file. | Add '--advance-heap' to LDFLAGS in application Makefile. |
 
 ## Changelog
+
+### v2.3.0
+- Added support for D-cache enablement on XMC7200 devices.
 
 ### v2.2.0
 - lwipopts.h updated to use macros generated from device configurator
@@ -32,8 +35,8 @@ This version of the library was validated for compatibility with the following s
 
 | Software and tools                                              | Version |
 | :---                                                            | :----:  |
-| ModusToolbox&trade; software environment                        | 3.1     |
-| ModusToolbox&trade; Device Configurator                         | 4.10     |
+| ModusToolbox&trade; software environment                        | 3.3     |
+| ModusToolbox&trade; Device Configurator                         | 5.10    |
 | GCC Compiler                                                    | 11.3.1  |
-| IAR Compiler                                                    | 9.30    |
-| Arm&reg; Compiler 6                                             | 6.16    |
+| IAR Compiler                                                    | 9.50.2  |
+| Arm&reg; Compiler 6                                             | 6.22    |

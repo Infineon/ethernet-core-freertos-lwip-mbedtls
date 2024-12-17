@@ -21,7 +21,9 @@ This library provides the configuration files for lwIP network stack and mbedTLS
 
 - **mbed TLS:** An open-source, portable, easy-to-use, readable and flexible SSL library that has cryptographic capabilities, version: 3.4.0. See the [mbed TLS](https://tls.mbed.org/) web site for details.
 
-   **Note:** Using this library in a project will cause mbed TLS to be downloaded on your computer. It is your responsibility to understand and accept the mbed TLS license and regional use restrictions (including abiding by all applicable export control laws).
+   **Note:** <br/> 
+   1. Using this library in a project will cause mbed TLS to be downloaded on your computer. It is your responsibility to understand and accept the mbed TLS license and regional use restrictions (including abiding by all applicable export control laws). <br/> 
+   2. mbedTLS hardware crypto acceleration is enabled for GCC toolchain. For ARM and IAR toolchains it is disabled.
 
 - **RTOS Abstraction Layer:** The RTOS abstraction APIs allow the middleware to be written to be RTOS-aware, but without depending on any particular RTOS. See [RTOS Abstraction Layer](https://github.com/Infineon/abstraction-rtos) repository for details.
 
@@ -71,27 +73,21 @@ You should do the following:
     DEFINES+=CY_RTOS_AWARE
     ```
 
-8. Add the `CY_DISABLE_XMC7000_DATA_CACHE` macro to the DEFINES in the code example's Makefile to disable data cache. The Makefile entry would look like as follows:
-
-    ```
-    DEFINES+=CY_DISABLE_XMC7000_DATA_CACHE
-    ```
-
-9. If your application uses automatic private IP addressing (Auto IP), enable `LWIP_AUTOIP` and `LWIP_DHCP_AUTOIP_COOP` in *lwipopts.h* like as follows:
+8. If your application uses automatic private IP addressing (Auto IP), enable `LWIP_AUTOIP` and `LWIP_DHCP_AUTOIP_COOP` in *lwipopts.h* like as follows:
 
     ```
     #define AUTOIP 1
     #define LWIP_DHCP_AUTOIP_COOP 1
     ```
 
-10. Add the following to `COMPONENTS` in the code example project's Makefile: `FREERTOS`, `LWIP`, and `MBEDTLS`.
+9. Add the following to `COMPONENTS` in the code example project's Makefile: `FREERTOS`, `LWIP`, and `MBEDTLS`.
 
     For example:
     
     ```
     COMPONENTS=FREERTOS LWIP MBEDTLS
     ``` 
-11. All the log messages are disabled by default. Do the following to enable log messages:
+10. All the log messages are disabled by default. Do the following to enable log messages:
 
    1. Add the `ENABLE_CONNECTIVITY_MIDDLEWARE_LOGS` macro to the *DEFINES* in the code example's Makefile to enable logs for lwIP network interface integration library. The Makefile entry should look like as follows:
        ```
