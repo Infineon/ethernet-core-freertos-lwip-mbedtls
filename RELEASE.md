@@ -11,6 +11,9 @@ See the [README.md](./README.md) for a complete description of the [Ethernet Cor
 
 ## Changelog
 
+### v2.3.1
+- Enabled Mbedtls acceleration with D-cache on XMC7200 devices.
+
 ### v2.3.0
 - Added support for D-cache enablement on XMC7200 devices.
 
