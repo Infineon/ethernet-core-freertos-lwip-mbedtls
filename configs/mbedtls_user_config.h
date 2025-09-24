@@ -28,7 +28,11 @@
 
 #ifndef MBEDTLS_USER_CONFIG_HEADER
 #define MBEDTLS_USER_CONFIG_HEADER
+
+#if !defined(COMPONENT_4390X)
 #include "cy_syslib.h"
+#endif
+
 /**
  * Compiling Mbed TLS for Cortex-M0/0+/1/M23 cores with optimization enabled and on ARMC6 compiler results in errors. 
  * These cores lack the required full Thumb-2 support, causing the inline assembly to require more registers than available.
@@ -955,6 +959,63 @@
  */
 #define FORCE_TLS_VERSION MBEDTLS_SSL_VERSION_TLS1_3
 
+/* Platform time alt */
+#define MBEDTLS_PLATFORM_MS_TIME_ALT
+
+
+/* Enable MXCRYPTO PSA driver */
+#define IFX_PSA_MXCRYPTO_PRESENT
+#define PSA_CRYPTO_ACCELERATOR_DRIVER_PRESENT
+#define MBEDTLS_PSA_CRYPTO_DRIVERS
+#define MBEDTLS_PSA_ASSUME_EXCLUSIVE_BUFFERS
+/**
+ * \def MBEDTLS_USE_PSA_CRYPTO
+ *
+ * Make the X.509 and TLS library use PSA for cryptographic operations, and
+ * enable new APIs for using keys handled by PSA Crypto.
+ *
+ * \note Development of this option is currently in progress, and parts of Mbed
+ * TLS's X.509 and TLS modules are not ported to PSA yet. However, these parts
+ * will still continue to work as usual, so enabling this option should not
+ * break backwards compatibility.
+ *
+ * \note See docs/use-psa-crypto.md for a complete description of what this
+ * option currently does, and of parts that are not affected by it so far.
+ *
+ * \warning If you enable this option, you need to call `psa_crypto_init()`
+ * before calling any function from the SSL/TLS, X.509 or PK modules.
+ *
+ * Requires: MBEDTLS_PSA_CRYPTO_C.
+ *
+ * Uncomment this to enable internal use of PSA Crypto and new associated APIs.
+ */
+#define MBEDTLS_USE_PSA_CRYPTO
+
+/**
+ * \def MBEDTLS_PSA_CRYPTO_CONFIG
+ *
+ * This setting allows support for cryptographic mechanisms through the PSA
+ * API to be configured separately from support through the mbedtls API.
+ *
+ * When this option is disabled, the PSA API exposes the cryptographic
+ * mechanisms that can be implemented on top of the `mbedtls_xxx` API
+ * configured with `MBEDTLS_XXX` symbols.
+ *
+ * When this option is enabled, the PSA API exposes the cryptographic
+ * mechanisms requested by the `PSA_WANT_XXX` symbols defined in
+ * include/psa/crypto_config.h. The corresponding `MBEDTLS_XXX` settings are
+ * automatically enabled if required (i.e. if no PSA driver provides the
+ * mechanism). You may still freely enable additional `MBEDTLS_XXX` symbols
+ * in mbedtls_config.h.
+ *
+ * If the symbol #MBEDTLS_PSA_CRYPTO_CONFIG_FILE is defined, it specifies
+ * an alternative header to include instead of include/psa/crypto_config.h.
+ *
+ * This feature is still experimental and is not ready for production since
+ * it is not completed.
+ */
+#define MBEDTLS_PSA_CRYPTO_CONFIG
+
 /**
  * \def Enable alternate crypto implementations to use the hardware
  *      acceleration. Include The hardware acceleration module's (cy-mbedtls-acceleration)
@@ -965,7 +1026,6 @@
 
 /* MBEDTLS defines for Dcache supported platforms */
 #if !defined (CY_DISABLE_XMC7000_DATA_CACHE) && defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U)
-
 /**
  * \def MBEDTLS_PLATFORM_MEMORY
  *
@@ -1040,7 +1100,6 @@
 #define MBEDTLS_THREADING_C
 
 #endif
-
 /**
  * The cy-mbedtls-acceleration module supports only DP_SECP192R1,
  * SECP224R1, SECP256R1, SECP384R1 and SECP521R1 curves. If any

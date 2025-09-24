@@ -134,7 +134,7 @@
 //
 #define LWIP_PROVIDE_ERRNO              (1)
 
-#if defined(__GNUC__) && !defined(__ARMCC_VERSION)
+#if !defined(__llvm__) && defined(__GNUC__) && !defined(__ARMCC_VERSION)
 //
 // Use the timeval from the GCC library, not the one
 // from LWIP
@@ -414,5 +414,14 @@
 #define LWIP_NETIF_REMOVE_CALLBACK    (1)
 
 #define LWIP_CHKSUM_ALGORITHM         (3)
+
+/**
+ * On M55 core in non-debug optimization level with GCC compiler, standard lwip chksum
+ * function returns incorrect values so use cy_lwip_standard_chksum() for check sum calculation.
+ */
+#if (CY_CPU_CORTEX_M55) && defined(__GNUC__) && !defined(__ARMCC_VERSION) && !defined(__llvm__) && defined(NDEBUG)
+#define LWIP_CHKSUM                   cy_lwip_standard_chksum
+extern uint16_t                       cy_lwip_standard_chksum() ;
+#endif
 
 extern void sys_check_core_locking() ;
