@@ -142,6 +142,12 @@
 #define LWIP_TIMEVAL_PRIVATE            (0)
 #endif
 
+#if defined(__llvm__) && !defined(__ARMCC_VERSION)
+__attribute__((weak)) __thread int __lwip_errno = 0;
+#define errno __lwip_errno
+#endif
+
+
 //
 // Make sure DHCP is part of the stack
 //

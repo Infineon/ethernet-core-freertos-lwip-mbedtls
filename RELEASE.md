@@ -11,6 +11,9 @@ See the [README.md](./README.md) for a complete description of the [Ethernet Cor
 
 ## Changelog
 
+### v3.0.1
+- Minor bug fixes.
+
 ### v3.0.0
 - Added support for PSOC™ Edge E84 (PSE84) platform.
 - Enabled LLVM_ARM toolchain support.
